@@ -4,7 +4,8 @@ import { request } from "./server";
 import { TaskList } from './components/TaskList';
 import { TaskForm } from './components/TaskForm';
 
-export type Task = { label: string; isDone: boolean };
+export type Task = { label: string; isDone: boolean; oneday:string};
+// export type Deadline = { date: string; isDone: boolean };
 
 const App: React.VFC = () => {
   // タスクリストを格納する
@@ -29,10 +30,10 @@ const App: React.VFC = () => {
       <h2>React Todo List</h2>
 
       {/* 一覧表示 */}
-      <TaskList {...{ tasks, setTasks }} />
+      <TaskList {...{ tasks, setTasks ,deadline ,setDeadline }} />
 
       {/* タスク追加、削除 */}
-      <TaskForm {...{ tasks, setTasks, newTaskLabel, setNewTaskLabel }} />
+      <TaskForm {...{ tasks, setTasks, newTaskLabel, setNewTaskLabel,deadline,setDeadline,newDeadline,setNewDeadline, }} />
     </div>
   );
 };

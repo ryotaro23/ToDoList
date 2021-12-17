@@ -1,5 +1,6 @@
 import React from 'react';
 import { Task } from '../';
+// import {Deadline} from '../'
 
 type Props = {
   tasks: Task[];
@@ -27,12 +28,23 @@ export const TaskForm: React.FC<Props> = ({
     setNewTaskLabel(e.target.value);
   };
 
-  // Taskの登録
+  const handleNewDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewDeadline(e.target.value);
+  };
+  console.log(newDeadline);
+
+
+  // Task・deadlineの登録
   const handleAddTask = () => {
-    const newTask = { label: newTaskLabel, isDone: false }
+    const newTask = { label: newTaskLabel, isDone: false, oneday:newDeadline }
+    setDeadline(newDeadline);
+    setNewDeadline('');
     setTasks([...tasks, newTask]);
     setNewTaskLabel('');
   };
+
+
+
 
   // 完了したTaskを削除する
   const handleClearTasks = () => {
@@ -50,9 +62,8 @@ export const TaskForm: React.FC<Props> = ({
       /><br/>
          <input
         onChange={handleNewDeadline}
-        type="text"
-        value={newTaskLabel}
-        placeholder="set the deadline "
+        type="date"
+        value={newDeadline}   
       />
       <button onClick={handleAddTask}>Add</button>
       <br />
