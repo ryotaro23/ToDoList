@@ -1,6 +1,11 @@
-import React from 'react';
+import Button from '@material-ui/core/Button/Button';
+import * as React from 'react';
 import { Task } from '../';
-// import {Deadline} from '../'
+import DeleteIcon from '@material-ui/icons/Delete';
+import Icon from '@material-ui/core/Icon';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+
+
 
 type Props = {
   tasks: Task[];
@@ -65,9 +70,25 @@ export const TaskForm: React.FC<Props> = ({
         type="date"
         value={newDeadline}   
       />
-      <button onClick={handleAddTask}>Add</button>
+      <Button
+        onClick={handleAddTask}
+        variant="contained"
+        color="primary"
+        endIcon={<AddCircleIcon/>}
+      >
+        Add
+      </Button>
       <br />
-      <button onClick={handleClearTasks}>Clear</button>
+      <Button
+        variant="contained"
+        color="secondary"
+        startIcon={<DeleteIcon />}
+        onClick={handleClearTasks}
+      >
+        Delete
+      </Button>
     </>
+    
   );
+ 
 };
