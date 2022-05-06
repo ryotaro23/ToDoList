@@ -3,9 +3,20 @@ import ReactDOM from "react-dom";
 import { request } from "./server";
 import { TaskList } from './components/TaskList';
 import { TaskForm } from './components/TaskForm';
+import { makeStyles } from '@material-ui/styles';
 
 export type Task = { label: string; isDone: boolean; oneday:string};
 // export type Deadline = { date: string; isDone: boolean };
+const useStyles = makeStyles((theme:any) => ({
+  title: {
+    color: 'red',
+    fontSize:80,
+  },
+  subTitle:{
+    fontSize:20,
+  },
+}));
+
 
 const App: React.VFC = () => {
   // タスクリストを格納する
@@ -23,10 +34,12 @@ const App: React.VFC = () => {
     request.fetchTasks((payload: Task[]) => setTasks(payload) );
   }, []);
 
+  const classes = useStyles();
+
   return (
     <div style={{ width: '700px', margin: '0 auto' }}>
       {/* ヘッダー */}
-      <h1>Tutorial Works</h1>
+      <h1 className={classes.title}>Tutorial Works</h1>
       <h2>React Todo List</h2>
 
       {/* 一覧表示 */}
