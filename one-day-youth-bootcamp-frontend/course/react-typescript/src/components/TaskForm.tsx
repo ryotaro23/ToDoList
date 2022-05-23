@@ -4,7 +4,8 @@ import { Task } from '../';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Icon from '@material-ui/core/Icon';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-
+import { MuiPickersUtilsProvider,KeyboardDatePicker,} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
   setNewTaskLabel: React.Dispatch<React.SetStateAction<string>>;
   deadline:string;
   setDeadline:React.Dispatch<React.SetStateAction<string>>;
-  newDeadline:string;
+  newDeadline:string|null;
   setNewDeadline:React.Dispatch<React.SetStateAction<string>>;
   
 };
@@ -33,8 +34,8 @@ export const TaskForm: React.FC<Props> = ({
     setNewTaskLabel(e.target.value);
   };
 
-  const handleNewDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewDeadline(e.target.value);
+  const handleNewDeadline = (date: Date,value?: string) => {
+    setNewDeadline(value);
   };
   console.log(newDeadline);
 
@@ -43,7 +44,7 @@ export const TaskForm: React.FC<Props> = ({
   const handleAddTask = () => {
     const newTask = { label: newTaskLabel, isDone: false, oneday:newDeadline }
     setDeadline(newDeadline);
-    setNewDeadline('');
+    setNewDeadline(null);
     setTasks([...tasks, newTask]);
     setNewTaskLabel('');
   };
@@ -65,11 +66,19 @@ export const TaskForm: React.FC<Props> = ({
         value={newTaskLabel}
         placeholder="Enter the task"
       /><br/>
-         <input
-        onChange={handleNewDeadline}
-        type="date"
-        value={newDeadline}   
-      />
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <KeyboardDatePicker
+          margin="normal"
+          id="date-picker-dialog"
+          label="Deadline"
+          format="MM/dd/yyyy"
+          value={newDeadline}
+          onChange={handleNewDeadline}
+          KeyboardButtonProps={{
+            'aria-label': 'change date',
+          }}
+        />
+        </MuiPickersUtilsProvider>
       <Button
         onClick={handleAddTask}
         variant="contained"

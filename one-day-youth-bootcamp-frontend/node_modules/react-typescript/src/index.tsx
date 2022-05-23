@@ -10,7 +10,7 @@ export type Task = { label: string; isDone: boolean; oneday:string};
 const useStyles = makeStyles((theme:any) => ({
   title: {
     color: 'red',
-    fontSize:80,
+    fontSize:40,
   },
   subTitle:{
     fontSize:20,
@@ -26,7 +26,7 @@ const App: React.VFC = () => {
   // 期限を格納する
   const [deadline, setDeadline] = useState<string>('');
   // 追加前のタスクを格納する
-  const [newDeadline, setNewDeadline] = useState<string>('');
+  const [newDeadline, setNewDeadline] = useState<string|null>(null);
 
 
   // ページマウント時にモックAPIからデータを取得
