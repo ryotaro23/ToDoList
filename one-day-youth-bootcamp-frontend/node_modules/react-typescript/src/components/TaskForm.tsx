@@ -6,6 +6,7 @@ import Icon from '@material-ui/core/Icon';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { MuiPickersUtilsProvider,KeyboardDatePicker,} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import TextField from '@material-ui/core/TextField';
 
 
 type Props = {
@@ -60,16 +61,16 @@ export const TaskForm: React.FC<Props> = ({
 
   return (
     <>
-      <input
-        onChange={handleNewTaskLabel}
-        type="text"
-        value={newTaskLabel}
-        placeholder="Enter the task"
-      /><br/>
+    <form noValidate autoComplete="off">
+      <TextField  
+      label="Enter the task" 
+      variant="outlined" 
+      value={newTaskLabel} 
+      onChange={handleNewTaskLabel} />
+    </form>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <KeyboardDatePicker
           margin="normal"
-          id="date-picker-dialog"
           label="Deadline"
           format="MM/dd/yyyy"
           value={newDeadline}
