@@ -9,16 +9,27 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import CommentIcon from '@material-ui/icons/Comment';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import { Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme:any) => ({
   title: {
-    color: 'red',
-    fontSize:100,
+    fontSize: '100',
     fontWeight:'bold',
   },
-  subTitle:{
-    fontSize:20,
+  task:{
+    width:'50%',
+    display:'inline',
   },
+  deadline:{
+    float:'right',
+    width:'50%',
+    display:'inline',
+  },
+  clock:{
+    float:'left',
+  },
+
 }));
 
 type Props = {
@@ -56,9 +67,15 @@ export const TaskList: React.FC<Props> = ({ tasks, setTasks,deadline ,setDeadlin
                 disableRipple
                 onChange={(e) => handleCheckBox(e, index)}
               />
-            </ListItemIcon>
-            <ListItemText className={classes.title} primary={
-              task.isDone ? <s>{task.label}{task.oneday}</s> : <i> {task.label}{task.oneday}</i>}/>
+            </ListItemIcon>          
+            <ListItemText primaryTypographyProps={{
+              color: 'primary',
+              variant: 'body1',
+            }} 
+            className={classes.title} primary={
+              task.isDone ? <><Typography className={classes.task} variant="h5"><s>{task.label}</s></Typography><Typography variant="h5" className={classes.deadline}><ScheduleIcon className={classes.clock}/>{task.oneday}</Typography></> 
+              : <><Typography className={classes.task} variant="h5">{task.label}</Typography><Typography variant="h5" className={classes.deadline}><ScheduleIcon className={classes.clock}/>{task.oneday}</Typography></> 
+            }/>
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="comments">
                 <CommentIcon />

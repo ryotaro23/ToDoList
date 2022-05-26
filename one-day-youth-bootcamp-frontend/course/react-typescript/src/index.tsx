@@ -4,6 +4,7 @@ import { request } from "./server";
 import { TaskList } from './components/TaskList';
 import { TaskForm } from './components/TaskForm';
 import { makeStyles } from '@material-ui/styles';
+import moment from 'moment';
 
 export type Task = { label: string; isDone: boolean; oneday:string};
 // export type Deadline = { date: string; isDone: boolean };
@@ -35,12 +36,14 @@ const App: React.VFC = () => {
   }, []);
 
   const classes = useStyles();
+  const now = moment();
+  const nowFormat = now.format('YYYY-MM-DD HH:mm:ss');
 
   return (
     <div style={{ width: '700px', margin: '0 auto' }}>
       {/* ヘッダー */}
       <h1 className={classes.title}>Tutorial Works</h1>
-      <h2>React Todo List</h2>
+      <h2>React Todo List</h2><h3>Today:{nowFormat}</h3>
 
       {/* 一覧表示 */}
       <TaskList {...{ tasks, setTasks ,deadline ,setDeadline }} />
